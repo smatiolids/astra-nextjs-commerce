@@ -27,7 +27,10 @@ export const handler: SWRHook<SearchProductsHook> = {
     query: getAllProductsQuery,
   },
   async fetcher({ input, options, fetch }) {
-    console.log('search input', input)
+    /**
+     * TO-DO
+     * - Implement search by category, brand and feature
+     */
     const { categoryId, brandId } = input
 
     // const variables: SearchQueryVariables = {
@@ -42,7 +45,6 @@ export const handler: SWRHook<SearchProductsHook> = {
       query: getAllProductsQuery,
     })
 
-    console.log('res search ', data)
     return {
       found: data.products.values.length > 0,
       products: normalizeSearchResult(data.products.values),
