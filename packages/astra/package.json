@@ -49,6 +49,7 @@
   "dependencies": {
     "@vercel/commerce": "workspace:*",
     "cookie": "^0.4.1",
+    "lodash.debounce": "^4.0.8",
     "uuid": "^9.0.0"
   },
   "peerDependencies": {

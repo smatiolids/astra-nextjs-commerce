@@ -17,8 +17,6 @@ const getCart: CartEndpoint['handlers']['getCart'] = async ({
       },
     })
 
-    console.log('data res', data.cart.values[0])
-
     return {
       data: data.cart.values[0]
         ? normalizeCartResult(data.cart.values[0])

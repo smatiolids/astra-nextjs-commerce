@@ -11,15 +11,11 @@ const addItem: CartEndpoint['handlers']['addItem'] = async ({
   body: { cartId, item },
   config,
 }) => {
-  console.log('Backend API add to Cart', cartId, item)
-
   const { data: prod } = await config.fetch(getProductByIdQuery, {
     variables: {
       product_id: item.productId,
     },
   })
-
-  console.log('pro', prod)
 
   const product = <Product>normalizeSearchResult(prod.products.values)[0]
 
@@ -31,7 +27,7 @@ const addItem: CartEndpoint['handlers']['addItem'] = async ({
     customerId: uuidv4(),
     productId: item.productId,
     variantId: item.productId,
-    quantity: item.quantity.toString(),
+    quantity: item?.quantity?.toString() ?? 1,
     url: `/${cartId}`,
     email: `none`,
     createdAt: cartId ? null : new Date().toISOString(),
@@ -40,13 +36,10 @@ const addItem: CartEndpoint['handlers']['addItem'] = async ({
     name: product.name,
   }
 
-  console.log('variables', variables)
-
   const { data } = await config.fetch(addItemToCartMutation, {
     variables,
   })
 
-  console.log('data res', data)
   console.log('data norm', normalizeCartResult(data.cart.value))
 
   return {

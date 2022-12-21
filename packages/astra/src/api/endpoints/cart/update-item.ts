@@ -9,6 +9,7 @@ const updateItem: CartEndpoint['handlers']['updateItem'] = async ({
   body: { cartId, itemId, item },
   config,
 }) => {
+  console.log('updateItemupdateItems', cartId, itemId, item)
   return true
 
   // const { data } = await config.storeApiFetch<{ data: BigcommerceCart }>(
