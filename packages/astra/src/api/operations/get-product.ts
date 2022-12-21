@@ -3,8 +3,8 @@ import { Product } from '@vercel/commerce/types/product'
 import { GetProductOperation } from '@vercel/commerce/types/product'
 import data from '../../data.json'
 import type { OperationContext } from '@vercel/commerce/api/operations'
-import { getProductQuery } from '../../utils/queries/get-product-by-slug-query'
-import { normalizeSearchResult } from '../../utils/normalize'
+import { getProductBySlugQuery } from '../../utils/graphql/get-product-by-slug-query'
+import { normalizeSearchResult } from '../../utils/normalize/normalizeSearchResult'
 
 export type ProductVariables = { slug?: string }
 
@@ -18,7 +18,7 @@ export default function getProductOperation({
   }): Promise<Product>
 
   async function getProduct<T extends GetProductOperation>({
-    query = getProductQuery,
+    query = getProductBySlugQuery,
     variables,
     config: cfg,
   }: {

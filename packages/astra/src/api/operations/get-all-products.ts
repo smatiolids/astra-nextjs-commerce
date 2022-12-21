@@ -1,8 +1,8 @@
 import { Product } from '@vercel/commerce/types/product'
 import { Provider, AstraConfig } from '../'
 import { OperationContext } from '@vercel/commerce/api/operations'
-import { getAllProductsQuery } from '../../utils/queries/get-all-products-query'
-import { normalizeSearchResult } from '../../utils/normalize'
+import { getAllProductsQuery } from '../../utils/graphql/get-all-products-query'
+import { normalizeSearchResult } from '../../utils/normalize/normalizeSearchResult'
 
 export type ProductVariables = { first?: number }
 
@@ -36,7 +36,7 @@ export default function getAllProductsOperation({
       //  variables,
     })
 
-    console.log('data', normalizeSearchResult(data.products.values))
+    // console.log('data', normalizeSearchResult(data.products.values))
 
     return {
       products: normalizeSearchResult(data.products.values),

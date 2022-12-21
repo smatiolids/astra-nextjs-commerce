@@ -11,7 +11,8 @@ import { handler as useSignup } from './auth/use-signup'
 
 export const astraProvider = {
   locale: 'en-us',
-  cartCookie: 'session',
+  cartCookie: 'astra_cartId',
+  cartCookieMaxAge: 60 * 60 * 24,
   fetcher: fetcher,
   cart: { useCart, useAddItem, useUpdateItem, useRemoveItem },
   customer: { useCustomer },

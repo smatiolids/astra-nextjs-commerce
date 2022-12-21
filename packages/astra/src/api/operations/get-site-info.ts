@@ -1,7 +1,7 @@
 import { OperationContext } from '@vercel/commerce/api/operations'
 import { Category, GetSiteInfoOperation } from '@vercel/commerce/types/site'
-import { normalizeSiteInfoResult } from '../../utils/normalize'
-import { getSiteInfoQuery } from '../../utils/queries/get-site-info'
+import { normalizeSiteInfoResult } from '../../utils/normalize/normalizeSearchResult'
+import { getSiteInfoQuery } from '../../utils/graphql/get-site-info'
 import { AstraConfig } from '../index'
 
 export type GetSiteInfoResult<

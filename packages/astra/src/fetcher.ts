@@ -1,5 +1,6 @@
 import { Fetcher } from '@vercel/commerce/utils/types'
 import { FetcherError } from '@vercel/commerce/utils/errors'
+import { objToQueryString } from './utils/shared'
 
 async function getText(res: Response) {
   try {
@@ -20,20 +21,22 @@ async function getError(res: Response) {
 export const fetcher: Fetcher = async ({
   url,
   method = 'POST',
+  params,
   variables,
   query,
   body: bodyObj,
 }) => {
-  const astraApiUrl = `https://${process.env.NEXT_PUBLIC_ASTRA_DB_ID}-${process.env.NEXT_PUBLIC_ASTRA_DB_REGION}.apps.astra.datastax.com/api/graphql/${process.env.NEXT_PUBLIC_ASTRA_DB_KEYSPACE}`
+  const astraApiUrl = `${url}?${params ? objToQueryString(params) : ''}`
+  const hasGraphQL = Boolean(variables || query)
+  const body = hasGraphQL
+    ? JSON.stringify({ query, variables })
+    : bodyObj
+    ? JSON.stringify(bodyObj)
+    : undefined
 
-  const hasBody = Boolean(variables || query)
-  const body = hasBody ? JSON.stringify({ query, variables }) : undefined
+  console.log('fetcher', url, method, hasGraphQL, body)
   const headers = new Headers()
   headers.append('Content-Type', 'application/json')
-  headers.append(
-    'x-cassandra-token',
-    process.env.NEXT_PUBLIC_ASTRA_DB_TOKEN || ''
-  )
 
   const res = await fetch(`${astraApiUrl}`, {
     method,
@@ -46,7 +49,8 @@ export const fetcher: Fetcher = async ({
     if (errors) {
       throw new FetcherError({ status: res.status, errors })
     }
-    return { data }
+    console.log('fetcher', data)
+    return data
   }
 
   throw await getError(res)
