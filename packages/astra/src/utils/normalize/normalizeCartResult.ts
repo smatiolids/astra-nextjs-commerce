@@ -2,7 +2,7 @@ import { Cart } from '@vercel/commerce/types/cart'
 
 export function normalizeCartResult(items: any[]): Cart {
   return {
-    id: items[0].id,
+    id: items[0].cartId,
     customerId: items[0].customerId,
     url: items[0].url || null,
     email: items[0].email || null,

@@ -1,9 +1,9 @@
 export const removeItemFromCartMutation = /* GraphQL */ `
   mutation removeItemFromCart($cartId: Uuid, $itemId: Uuid) {
-    cart: deletecart(value: { id: $cartId, itemid: $itemId }) {
+    cart: deletecarts(value: { cartid: $cartId, itemid: $itemId }) {
       value {
-        id
-        itemid
+        cartId: cartid
+        itemId: itemid
       }
     }
   }

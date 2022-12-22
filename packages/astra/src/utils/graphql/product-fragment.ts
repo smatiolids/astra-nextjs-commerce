@@ -1,8 +1,8 @@
 export const productResultFragment = /* GraphQL */ `
   fragment ProductResult on products {
-    product_id
+    productId: productid
     kind
-    id
+    variantId: variantid
     name
     description
     descriptionHtml: description

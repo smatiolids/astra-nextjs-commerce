@@ -10,8 +10,6 @@ const updateItem: CartEndpoint['handlers']['updateItem'] = async ({
   body: { cartId, itemId, item },
   config,
 }) => {
-  console.log('updateItemupdateItems', cartId, itemId, item)
-
   const { data: cart } = await config.fetch(getCartByIdQuery, {
     variables: {
       cartId,
@@ -21,7 +19,7 @@ const updateItem: CartEndpoint['handlers']['updateItem'] = async ({
   if (!cart.cart.values) return null
 
   const itemUpd = cart.cart.values.find(
-    (i) => i.id === cartId && i.itemId === itemId
+    (i) => i.cartId === cartId && i.itemId === itemId
   )
   itemUpd.quantity = item.quantity
 
@@ -38,7 +36,7 @@ const updateItem: CartEndpoint['handlers']['updateItem'] = async ({
 
   if (
     cartUpdated.lineItemsSubtotalPrice !==
-    parseFloat(updQty.cart.value.lineitemssubtotalprice)
+    parseFloat(updQty.cart.value.lineItemsSubtotalPrice)
   )
     throw new CommerceAPIError('Error on updating quantity')
 

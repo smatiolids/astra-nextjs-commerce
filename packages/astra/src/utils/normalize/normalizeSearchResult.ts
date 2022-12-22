@@ -6,7 +6,7 @@ export function normalizeSearchResult(items: any[]): Product[] {
     .filter((item) => item.kind === 'root')
     .map((item) => {
       return {
-        id: item.product_id,
+        id: item.productId,
         name: item.name,
         description: item.description,
         descriptionHtml: item.descriptionHtml,
@@ -20,7 +20,7 @@ export function normalizeSearchResult(items: any[]): Product[] {
           .filter((v) => v.kind === 'variant' && v.productId === item.productId)
           .map((v) => {
             return {
-              id: v.id,
+              id: v.variantId,
               name: v.name,
               sku: v.sku || null,
               options: v.options,

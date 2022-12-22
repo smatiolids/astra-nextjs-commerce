@@ -13,14 +13,14 @@ const addItem: CartEndpoint['handlers']['addItem'] = async ({
 }) => {
   const { data: prod } = await config.fetch(getProductByIdQuery, {
     variables: {
-      product_id: item.productId,
+      productId: item.productId,
     },
   })
 
   const product = normalizeSearchResult(prod.products.values)[0]
 
   const variables = {
-    id: cartId || uuidv4(),
+    cartId: cartId || uuidv4(),
     itemId: uuidv4(),
     customerId: uuidv4(),
     productId: item.productId,
@@ -43,7 +43,7 @@ const addItem: CartEndpoint['handlers']['addItem'] = async ({
     headers: {
       'Set-Cookie': getCartCookie(
         config.cartCookie,
-        variables.id,
+        variables.cartId,
         config.cartCookieMaxAge
       ),
     },

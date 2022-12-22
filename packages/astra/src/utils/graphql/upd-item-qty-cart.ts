@@ -9,19 +9,19 @@ export const updateItemQtyMutation = /* GraphQL */ `
     $quantity: Decimal
     $lineItemsSubtotalPrice: Decimal
   ) {
-    cart: updatecart(
+    cart: updatecarts(
       value: {
-        id: $cartId
+        cartid: $cartId
         itemid: $itemId
         quantity: $quantity
         lineitemssubtotalprice: $lineItemsSubtotalPrice
       }
     ) {
       value {
-        id
-        itemid
+        cartId: cartid
+        itemId: itemid
         quantity
-        lineitemssubtotalprice
+        lineItemsSubtotalPrice: lineitemssubtotalprice
       }
     }
   }

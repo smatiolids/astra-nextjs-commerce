@@ -4,11 +4,14 @@ import { cartResultFragment } from './cart-fragment'
 
 export const updateCartTotalMutation = /* GraphQL */ `
   mutation updateCartTotal($cartId: Uuid, $lineItemsSubtotalPrice: Decimal) {
-    cart: updatecart(
-      value: { id: $cartId, lineitemssubtotalprice: $lineItemsSubtotalPrice }
+    cart: updatecarts(
+      value: {
+        cartid: $cartId
+        lineitemssubtotalprice: $lineItemsSubtotalPrice
+      }
     ) {
       value {
-        id
+        cartId: cartid
         lineitemssubtotalprice
       }
     }

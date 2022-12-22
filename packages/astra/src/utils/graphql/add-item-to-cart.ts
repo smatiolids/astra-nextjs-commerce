@@ -4,7 +4,7 @@ import { cartResultFragment } from './cart-fragment'
 
 export const addItemToCartMutation = /* GraphQL */ `
   mutation createCart(
-    $id: Uuid
+    $cartId: Uuid
     $itemId: Uuid
     $customerId: Uuid
     $productId: Uuid
@@ -18,9 +18,9 @@ export const addItemToCartMutation = /* GraphQL */ `
     $name: String
     $quantity: Decimal
   ) {
-    cart: insertcart(
+    cart: insertcarts(
       value: {
-        id: $id
+        cartid: $cartId
         itemid: $itemId
         variantid: $variantId
         url: $url
