@@ -33,7 +33,7 @@ export const handler: MutationHook<any> = {
     ({ fetch }) =>
     (
       ctx: {
-        item?: T
+        item?: any
         wait?: number
       } = {}
     ) => {

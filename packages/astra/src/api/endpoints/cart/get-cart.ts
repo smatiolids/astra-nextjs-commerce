@@ -18,13 +18,11 @@ const getCart: CartEndpoint['handlers']['getCart'] = async ({
     })
 
     return {
-      data: data.cart.values[0]
-        ? normalizeCartResult(data.cart.values[0])
-        : null,
+      data: data.cart.values[0] ? normalizeCartResult(data.cart.values) : null,
       headers: {
         'Set-Cookie': getCartCookie(
           config.cartCookie,
-          data.cart.values[0].id,
+          cartId,
           config.cartCookieMaxAge
         ),
       },

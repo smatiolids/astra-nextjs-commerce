@@ -17,9 +17,7 @@ const addItem: CartEndpoint['handlers']['addItem'] = async ({
     },
   })
 
-  const product = <Product>normalizeSearchResult(prod.products.values)[0]
-
-  console.log('product', product)
+  const product = normalizeSearchResult(prod.products.values)[0]
 
   const variables = {
     id: cartId || uuidv4(),
@@ -40,14 +38,12 @@ const addItem: CartEndpoint['handlers']['addItem'] = async ({
     variables,
   })
 
-  console.log('data norm', normalizeCartResult(data.cart.value))
-
   return {
-    data: normalizeCartResult(data.cart.value),
+    data: data.cart.values ? normalizeCartResult(data.cart.values) : null,
     headers: {
       'Set-Cookie': getCartCookie(
         config.cartCookie,
-        data.cart.value.id,
+        variables.id,
         config.cartCookieMaxAge
       ),
     },

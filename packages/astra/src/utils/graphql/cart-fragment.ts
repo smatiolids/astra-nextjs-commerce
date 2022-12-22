@@ -1,7 +1,7 @@
 export const cartResultFragment = /* GraphQL */ `
   fragment CartResult on cart {
     id
-    itemid
+    itemId: itemid
     customerId: customerid
     productId: productid
     variantId: variantid

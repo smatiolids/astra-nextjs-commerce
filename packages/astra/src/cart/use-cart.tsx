@@ -10,6 +10,7 @@ export const handler: SWRHook<any> = {
     method: 'GET',
   },
   async fetcher({ input: item, options, fetch }) {
+    console.log('fetch get', item)
     const data = await fetch({
       ...options,
       params: { ...item },

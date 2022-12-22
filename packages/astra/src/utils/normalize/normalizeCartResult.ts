@@ -1,38 +1,47 @@
 import { Cart } from '@vercel/commerce/types/cart'
 
-export function normalizeCartResult(item: any): Cart[] {
+export function normalizeCartResult(items: any[]): Cart {
   return {
-    id: item.id,
-    customerId: item.customerId,
-    url: item.url || null,
-    email: item.email || null,
-    createdAt: item.createdAt || new Date().toISOString(),
-    currency: { code: item.currency || 'BRL' },
-    taxesIncluded: item.taxesIncluded || false,
-    lineItems: [
-      {
-        id: item.id,
-        variantId: item.variantId,
-        productId: item.productId,
+    id: items[0].id,
+    customerId: items[0].customerId,
+    url: items[0].url || null,
+    email: items[0].email || null,
+    createdAt: items[0].createdAt || new Date().toISOString(),
+    currency: { code: items[0].currency || 'BRL' },
+    taxesIncluded: items[0].taxesIncluded || false,
+    lineItems: items.map((item) => ({
+      id: item.itemId,
+      variantId: item.variantId,
+      productId: item.productId,
+      name: item.name,
+      quantity: parseFloat(item.quantity),
+      subtotalPrice: parseFloat(item.totalPrice) || 1,
+      totalPrice: parseFloat(item.totalPrice) || 0,
+      discounts: [],
+      path: item.path,
+      options: item.options,
+      variant: {
+        id: item.variantId,
         name: item.name,
-        quantity: parseFloat(item.quantity),
-        discounts: item.discount,
-        path: item.path,
-        options: item.options,
-        variant: {
-          id: item.variantId,
-          name: 'name',
-          price: parseFloat(item.subtotalPrice) || 0,
-          listPrice: parseFloat(item.subtotalPrice) || 0,
-          image: {
-            url: 'image_url',
-          },
+        price: parseFloat(item.totalPrice) || 0,
+        listPrice: parseFloat(item.totalPrice) || 0,
+        image: {
+          url: 'image_url',
         },
       },
-    ],
-    lineItemsSubtotalPrice: parseFloat(item.lineItemsSubtotalPrice) || 1,
-    subtotalPrice: parseFloat(item.subtotalPrice) || 1,
-    totalPrice: parseFloat(item.totalPrice) || 0,
-    discounts: item.discounts || [],
+    })),
+    lineItemsSubtotalPrice: items.reduce((acc, item) => {
+      acc += parseFloat(item.totalPrice) * parseFloat(item.quantity)
+      return acc
+    }, 0),
+    subtotalPrice: items.reduce((acc, item) => {
+      acc += parseFloat(item.totalPrice) * parseFloat(item.quantity)
+      return acc
+    }, 0),
+    totalPrice: items.reduce((acc, item) => {
+      acc += parseFloat(item.totalPrice) * parseFloat(item.quantity)
+      return acc
+    }, 0),
+    discounts: [],
   }
 }
