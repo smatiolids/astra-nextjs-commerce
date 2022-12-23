@@ -7,7 +7,6 @@ import products from './catalog/products'
 
 const endpoints = {
   cart,
-  search: products,
 }
 
 export default function astraAPI(commerce: AstraAPI) {

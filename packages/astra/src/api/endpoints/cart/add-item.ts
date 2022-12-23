@@ -36,7 +36,6 @@ const addItem: CartEndpoint['handlers']['addItem'] = async ({
     ...(!cartId && { createdAt: new Date().toISOString() }),
   }
 
-  console.log('variables', variables)
   const { data } = await config.fetch(addItemToCartMutation, {
     variables,
   })

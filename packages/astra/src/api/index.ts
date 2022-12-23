@@ -38,7 +38,7 @@ export const provider = { config, operations }
 
 export type Provider = typeof provider
 
-export type APIs = CartAPI | ProductsAPI
+export type APIs = CartAPI
 
 export type AstraAPI<P extends Provider = Provider> = CommerceAPI<P | any>
 
