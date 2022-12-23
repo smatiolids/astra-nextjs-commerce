@@ -26,7 +26,7 @@ export function normalizeCartResult(items: any[]): Cart {
         price: parseFloat(item.totalPrice) || 0,
         listPrice: parseFloat(item.totalPrice) || 0,
         image: {
-          url: 'image_url',
+          url: item.imageUrl,
         },
       },
     })),

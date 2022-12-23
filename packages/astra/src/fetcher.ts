@@ -26,7 +26,14 @@ export const fetcher: Fetcher = async ({
   query,
   body: bodyObj,
 }) => {
-  const astraApiUrl = `${url}?${params ? objToQueryString(params) : ''}`
+  /**
+   * If no url are informed, it is a graphQL to Astra Stargate endpoint
+   * If there are a url, it will be redirected to the next.js Api
+   */
+  const astraApiUrl = url
+    ? `${url}?${params ? objToQueryString(params) : ''}`
+    : `https://${process.env.NEXT_PUBLIC_ASTRA_DB_ID}-${process.env.NEXT_PUBLIC_ASTRA_DB_REGION}.apps.astra.datastax.com/api/graphql/${process.env.NEXT_PUBLIC_ASTRA_DB_KEYSPACE}`
+
   const hasGraphQL = Boolean(variables || query)
   const body = hasGraphQL
     ? JSON.stringify({ query, variables })
@@ -34,9 +41,10 @@ export const fetcher: Fetcher = async ({
     ? JSON.stringify(bodyObj)
     : undefined
 
-  console.log('fetcher', url, method, hasGraphQL, body)
   const headers = new Headers()
   headers.append('Content-Type', 'application/json')
+  if (!url)
+    headers.append('x-cassandra-token', process.env.NEXT_PUBLIC_ASTRA_DB_TOKEN)
 
   const res = await fetch(`${astraApiUrl}`, {
     method,
@@ -46,10 +54,10 @@ export const fetcher: Fetcher = async ({
 
   if (res.ok) {
     const { data, errors } = await res.json()
+
     if (errors) {
       throw new FetcherError({ status: res.status, errors })
     }
-    console.log('fetcher', data)
     return data
   }
 

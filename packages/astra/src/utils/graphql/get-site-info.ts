@@ -8,7 +8,7 @@ export const getSiteInfoQuery = /* GraphQL */ `
     ) {
       values {
         name
-        id
+        id: slug
         slug
       }
     }
@@ -18,7 +18,7 @@ export const getSiteInfoQuery = /* GraphQL */ `
     ) {
       values {
         name
-        id
+        id: slug
         slug
       }
     }

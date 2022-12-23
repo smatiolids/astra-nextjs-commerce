@@ -27,13 +27,16 @@ const addItem: CartEndpoint['handlers']['addItem'] = async ({
     variantId: item.productId,
     quantity: item?.quantity?.toString() ?? 1,
     url: `/${cartId}`,
+    path: `/${product.slug}`,
+    imageUrl: product.images.length > 0 ? product.images[0].url : null,
     email: `none`,
-    createdAt: cartId ? null : new Date().toISOString(),
     totalPrice: product.price.value.toString(),
     currency: product.price.currencyCode || 'USD',
     name: product.name,
+    ...(!cartId && { createdAt: new Date().toISOString() }),
   }
 
+  console.log('variables', variables)
   const { data } = await config.fetch(addItemToCartMutation, {
     variables,
   })

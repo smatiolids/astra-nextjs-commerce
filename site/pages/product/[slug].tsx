@@ -33,7 +33,6 @@ export async function getStaticProps({
   const { product } = await productPromise
   const { products: relatedProducts } = await allProductsPromise
 
-  console.log('products pages', params!.slug, product)
   if (!product) {
     return {
       notFound: true,

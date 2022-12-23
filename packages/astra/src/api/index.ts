@@ -3,6 +3,7 @@ import { getCommerceApi as commerceApi } from '@vercel/commerce/api'
 import createFetcher from './utils/fetch-astra'
 
 import type { CartAPI } from './endpoints/cart'
+import type { ProductsAPI } from './endpoints/catalog/products'
 
 import getAllPages from './operations/get-all-pages'
 import getPage from './operations/get-page'
@@ -37,7 +38,7 @@ export const provider = { config, operations }
 
 export type Provider = typeof provider
 
-export type APIs = CartAPI
+export type APIs = CartAPI | ProductsAPI
 
 export type AstraAPI<P extends Provider = Provider> = CommerceAPI<P | any>
 

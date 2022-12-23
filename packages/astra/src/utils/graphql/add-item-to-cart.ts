@@ -10,6 +10,8 @@ export const addItemToCartMutation = /* GraphQL */ `
     $productId: Uuid
     $variantId: Uuid
     $url: String
+    $path: String
+    $imageUrl: String
     $email: String
     $currency: String
     $createdAt: Timestamp
@@ -32,6 +34,8 @@ export const addItemToCartMutation = /* GraphQL */ `
         subtotalprice: $subtotalPrice
         totalprice: $totalPrice
         name: $name
+        path: $path
+        imageurl: $imageUrl
         quantity: $quantity
       }
     ) {

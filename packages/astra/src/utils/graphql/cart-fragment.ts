@@ -8,6 +8,8 @@ export const cartResultFragment = /* GraphQL */ `
     currency
     url
     email
+    path
+    imageUrl: imageurl
     createdAt: createdat
     subtotalPrice: subtotalprice
     totalPrice: totalprice

@@ -29,21 +29,26 @@ export const handler: SWRHook<SearchProductsHook> = {
   async fetcher({ input, options, fetch }) {
     /**
      * TO-DO
-     * - Implement search by category, brand and feature
+     * - Implement search by feature
      */
-    const { categoryId, brandId } = input
 
-    // const variables: SearchQueryVariables = {
-    //   input: {
-    //     term: input.search,
-    //     collectionId: input.categoryId?.toString(),
-    //     groupByProduct: true,
-    //     // TODO: what is the "sort" value?
-    //   },
-    // }
-    const { data } = await fetch<any>({
+    const variables = {
+      ...(input.categoryId && { category: input.categoryId }),
+      ...(input.brandId && { brand: input.brandId }),
+    }
+
+    const data = await fetch<any>({
       query: getAllProductsQuery,
+      variables,
     })
+
+    if (!data)
+      return {
+        data: {
+          found: false,
+          products: [],
+        },
+      }
 
     return {
       found: data.products.values.length > 0,

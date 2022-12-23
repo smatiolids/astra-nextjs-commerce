@@ -37,7 +37,6 @@ export const handler: MutationHook<any> = {
     ({ fetch }) =>
     () => {
       const { mutate } = useCart()
-      // console.log('mutate', mutate)
       return useCallback(
         async function addItem(input) {
           const data = await fetch({ input })

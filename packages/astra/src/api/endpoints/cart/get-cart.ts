@@ -8,8 +8,6 @@ const getCart: CartEndpoint['handlers']['getCart'] = async ({
   body: { cartId },
   config,
 }) => {
-  console.log('Backend API get Cart', cartId, config)
-
   if (cartId) {
     const { data } = await config.fetch(getCartByIdQuery, {
       variables: {

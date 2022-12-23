@@ -26,17 +26,10 @@ export default function getAllProductsOperation({
     preview?: boolean
   } = {}): Promise<{ products: Product[] | any[] }> {
     const config = commerce.getConfig(cfg)
-    // const variables = {
-    //   input: {
-    //     take: vars.first,
-    //     groupByProduct: true,
-    //   },
-    // }
+
     const { data } = await config.fetch(query, {
       //  variables,
     })
-
-    // console.log('data', normalizeSearchResult(data.products.values))
 
     return {
       products: normalizeSearchResult(data.products.values),

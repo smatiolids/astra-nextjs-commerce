@@ -17,11 +17,16 @@ importers:
       '@taskr/clear': ^1.1.0
       '@taskr/esnext': ^1.1.0
       '@taskr/watch': ^1.1.0
+      '@types/cookie': ^0.4.1
+      '@types/lodash.debounce': ^4.0.7
       '@types/node': ^17.0.8
       '@types/node-fetch': 2.6.2
       '@types/react': ^18.0.14
+      '@types/uuid': ^9.0.0
       '@vercel/commerce': workspace:*
+      cookie: ^0.4.1
       lint-staged: ^12.1.7
+      lodash.debounce: ^4.0.8
       next: ^12.0.8
       prettier: ^2.5.1
       react: ^18.2.0
@@ -29,15 +34,22 @@ importers:
       taskr: ^1.1.0
       taskr-swc: ^0.0.1
       typescript: ^4.7.4
+      uuid: ^9.0.0
     dependencies:
       '@vercel/commerce': link:../commerce
+      cookie: 0.4.2
+      lodash.debounce: 4.0.8
+      uuid: 9.0.0
     devDependencies:
       '@taskr/clear': 1.1.0
       '@taskr/esnext': 1.1.0
       '@taskr/watch': 1.1.0
+      '@types/cookie': 0.4.1
+      '@types/lodash.debounce': 4.0.7
       '@types/node': 17.0.45
       '@types/node-fetch': 2.6.2
       '@types/react': 18.0.20
+      '@types/uuid': 9.0.0
       lint-staged: 12.5.0
       next: 12.3.0_biqbaboplfbrettd7655fr4n2y
       prettier: 2.7.1
@@ -643,6 +655,7 @@ importers:
       autoprefixer: ^10.4.2
       body-scroll-lock: ^4.0.0-beta.0
       clsx: ^1.1.1
+      deepmerge: ^4.2.2
       email-validator: ^2.0.4
       eslint: ^8.6.0
       eslint-config-next: ^12.0.8
@@ -676,6 +689,7 @@ importers:
       autoprefixer: 10.4.10_postcss@8.4.16
       body-scroll-lock: 4.0.0-beta.0
       clsx: 1.2.1
+      deepmerge: 4.2.2
       email-validator: 2.0.4
       js-cookie: 3.0.1
       keen-slider: 6.8.0
@@ -3221,6 +3235,10 @@ packages:
   /@types/uuid/8.3.4:
     resolution: {integrity: sha512-c/I8ZRb51j+pYGAu5CrFMRxqZ2ke4y2grEBO5AUjgSkSk+qT2Ea+OdWElz/OiMf5MNpn2b17kuVBwZLQJXzihw==}
     dev: false
+
+  /@types/uuid/9.0.0:
+    resolution: {integrity: sha512-kr90f+ERiQtKWMz5rP32ltJ/BtULDI5RVO0uavn1HQUOwjx0R1h0rnDYNL0CepF1zL5bSY6FISAfd9tOdDhU5Q==}
+    dev: true
 
   /@types/ws/8.5.3:
     resolution: {integrity: sha512-6YOoWjruKj1uLf3INHH7D3qTXwFfEsg1kf3c0uDdSBJwfa/llkwIjrAGV7j7mVgGNbzTQ3HiHKKDXl6bJPD97w==}
@@ -9504,6 +9522,11 @@ packages:
 
   /uuid/8.3.2:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
+    hasBin: true
+    dev: false
+
+  /uuid/9.0.0:
+    resolution: {integrity: sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==}
     hasBin: true
     dev: false
 

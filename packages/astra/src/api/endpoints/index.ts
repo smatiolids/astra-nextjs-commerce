@@ -3,9 +3,11 @@ import type { AstraAPI, Provider } from '..'
 import createEndpoints from '@vercel/commerce/api/endpoints'
 
 import cart from './cart'
+import products from './catalog/products'
 
 const endpoints = {
   cart,
+  search: products,
 }
 
 export default function astraAPI(commerce: AstraAPI) {

@@ -14,8 +14,6 @@ const removeItem: CartEndpoint['handlers']['removeItem'] = async ({
   body: { cartId, itemId },
   config,
 }) => {
-  console.log('removeItem', cartId, itemId)
-
   const { data: deletedItem } = await config.fetch(removeItemFromCartMutation, {
     variables: {
       cartId,
@@ -54,8 +52,6 @@ const removeItem: CartEndpoint['handlers']['removeItem'] = async ({
       lineItemsSubtotalPrice: cartUpdated.lineItemsSubtotalPrice,
     },
   })
-
-  console.log(cartUpdated, totalCart)
 
   if (
     cartUpdated.lineItemsSubtotalPrice !==

@@ -21,7 +21,6 @@ export const handler: MutationHook<any> = {
     method: 'PUT',
   },
   async fetcher({ input: { itemId, item }, options, fetch }) {
-    console.log('fetcher', itemId, item, options)
     const data = await fetch({
       ...options,
       body: { itemId, item },
@@ -40,7 +39,6 @@ export const handler: MutationHook<any> = {
       const { item } = ctx
       const { mutate } = useCart() as any
 
-      console.log('update hook', item)
       return useCallback(
         debounce(async (input: any) => {
           const itemId = input.id ?? item?.id
