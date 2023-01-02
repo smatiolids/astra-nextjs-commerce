@@ -28,23 +28,27 @@ import jwtDecode, { JwtPayload } from 'jwt-decode'
 
 const getLoggedInCustomer: CustomerEndpoint['handlers']['getLoggedInCustomer'] =
   async ({ req, config }) => {
-    const token: string | undefined = req.cookies.get(config.customerCookie)
+    const token: any = req.cookies.get(config.customerCookie)
+
+    console.log('token', token)
 
     if (!token)
       return {
         data: null,
       }
 
-    const token_decoded = jwtDecode<any>(<string>token, {})
+    const token_decoded = jwtDecode<any>(<string>token.value, {})
 
     console.log('token_decoded', token_decoded)
     if (token_decoded.email) {
       return {
         data: {
-          id: String(token_decoded.customerId),
-          firstName: token_decoded.firstName,
-          lastName: token_decoded.lastName,
-          email: token_decoded.email,
+          customer: {
+            id: String(token_decoded.customerId),
+            firstName: token_decoded.firstName,
+            lastName: token_decoded.lastName,
+            email: token_decoded.email,
+          },
         },
       }
     }
