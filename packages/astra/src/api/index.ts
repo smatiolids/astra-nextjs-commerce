@@ -4,6 +4,10 @@ import createFetcher from './utils/fetch-astra'
 
 import type { CartAPI } from './endpoints/cart'
 import type { ProductsAPI } from './endpoints/catalog/products'
+import type { CustomerAPI } from './endpoints/customer'
+import type { LoginAPI } from './endpoints/login'
+import type { LogoutAPI } from './endpoints/logout'
+import type { SignupAPI } from './endpoints/signup'
 
 import getAllPages from './operations/get-all-pages'
 import getPage from './operations/get-page'
@@ -38,7 +42,13 @@ export const provider = { config, operations }
 
 export type Provider = typeof provider
 
-export type APIs = CartAPI
+export type APIs =
+  | CartAPI
+  | CustomerAPI
+  | LoginAPI
+  | LogoutAPI
+  | SignupAPI
+  | ProductsAPI
 
 export type AstraAPI<P extends Provider = Provider> = CommerceAPI<P | any>
 

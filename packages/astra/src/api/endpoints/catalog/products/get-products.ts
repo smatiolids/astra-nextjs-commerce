@@ -10,11 +10,9 @@ const SORT: { [key: string]: string | undefined } = {
 const LIMIT = 12
 
 const getProducts: ProductsEndpoint['handlers']['getProducts'] = async ({
-  body,
-  config,
-  commerce,
+  body: { search, categoryId, brandId, sort },
 }) => {
-  console.log('get Products endpoint', body)
+  console.log('get Products endpoint', search, categoryId, brandId, sort)
   return { data: { products: [], found: false } }
 }
 

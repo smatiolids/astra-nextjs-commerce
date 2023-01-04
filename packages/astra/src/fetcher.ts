@@ -31,7 +31,9 @@ export const fetcher: Fetcher = async ({
    * If there are a url, it will be redirected to the next.js Api
    */
   const astraApiUrl = url
-    ? `${url}?${params ? objToQueryString(params) : ''}`
+    ? params
+      ? `${url}?${params ? objToQueryString(params) : ''}`
+      : url
     : `https://${process.env.NEXT_PUBLIC_ASTRA_DB_ID}-${process.env.NEXT_PUBLIC_ASTRA_DB_REGION}.apps.astra.datastax.com/api/graphql/${process.env.NEXT_PUBLIC_ASTRA_DB_KEYSPACE}`
 
   const hasGraphQL = Boolean(variables || query)
@@ -46,6 +48,7 @@ export const fetcher: Fetcher = async ({
   if (!url)
     headers.append('x-cassandra-token', process.env.NEXT_PUBLIC_ASTRA_DB_TOKEN)
 
+  console.log('fetch', astraApiUrl)
   const res = await fetch(`${astraApiUrl}`, {
     method,
     body,

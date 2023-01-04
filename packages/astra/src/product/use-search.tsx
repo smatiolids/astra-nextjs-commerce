@@ -7,6 +7,7 @@ import { Product } from '@vercel/commerce/types/product'
 import type { SearchProductsHook } from '@vercel/commerce/types/product'
 import { getAllProductsQuery } from '../utils/graphql/get-all-products-query'
 import { normalizeSearchResult } from '../utils/normalize/normalizeSearchResult'
+import { objToQueryString } from '../utils/shared'
 
 export default useSearch as UseSearch<typeof handler>
 
@@ -27,18 +28,28 @@ export const handler: SWRHook<SearchProductsHook> = {
     url: '/api/commerce/catalog/products',
     method: 'GET',
   },
-  async fetcher({ input, options, fetch }) {
+  async fetcher({
+    input: { search, categoryId, brandId, sort },
+    options,
+    fetch,
+  }) {
     /**
      * TO-DO
      * - Implement search by feature
      */
 
-    console.log('Search', input)
-    console.log(input)
+    const url = new URL(options.url!, 'http://a')
 
-    const data = await fetch<any>({
-      ...options,
-      params: input,
+    if (search) url.searchParams.set('search', search)
+    if (Number.isInteger(Number(categoryId)))
+      url.searchParams.set('categoryId', String(categoryId))
+    if (Number.isInteger(Number(brandId)))
+      url.searchParams.set('brandId', String(brandId))
+    if (sort) url.searchParams.set('sort', sort)
+
+    const data = await fetch({
+      url: url.pathname + url.search,
+      method: options.method,
     })
 
     if (!data)

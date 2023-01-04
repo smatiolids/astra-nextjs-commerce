@@ -44,11 +44,27 @@ export const transformRequest = (req: NextApiRequest, path: string) => {
     body = JSON.stringify(req.body)
   }
 
-  return new NextRequest(`https://${req.headers.host}/api/commerce/${path}`, {
-    headers,
-    method: req.method,
-    body,
-  })
+  let query
+
+  if (req.query) {
+    delete req.query.commerce
+    query =
+      '?' +
+      Object.entries(req.query)
+        .map(([key, val]) => `${key}=${encodeURIComponent(val)}`)
+        .join('&')
+  }
+
+  console.log(' before transform req.query', query)
+
+  return new NextRequest(
+    `https://${req.headers.host}/api/commerce/${path}${query}`,
+    {
+      headers,
+      method: req.method,
+      body,
+    }
+  )
 }
 
 /**
