@@ -7,8 +7,7 @@ import login from './login'
 import logout from './logout'
 import signup from './signup'
 import customer from './customer'
-
-// import products from './catalog/products'
+import products from './catalog/products'
 
 const endpoints = {
   cart,
@@ -16,6 +15,7 @@ const endpoints = {
   logout,
   signup,
   customer,
+  'catalog/products': products,
 }
 
 export default function astraAPI(commerce: AstraAPI) {

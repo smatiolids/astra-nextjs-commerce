@@ -12,16 +12,13 @@ export const handler: SWRHook<CustomerHook> = {
     method: 'GET',
   },
   async fetcher({ options, fetch }) {
-    console.log('useCustomer fetcher options', options)
     const data = await fetch(options)
-    console.log('useCustomer fetcher', options, data)
 
-    return data ? { customer: data } : null
+    return data.customer ?? null
   },
   useHook:
     ({ useData }) =>
     (input) => {
-      console.log('useCustomer input', input)
       return useData({
         swrOptions: {
           revalidateOnFocus: false,

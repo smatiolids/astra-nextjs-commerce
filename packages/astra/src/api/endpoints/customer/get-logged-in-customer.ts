@@ -30,8 +30,6 @@ const getLoggedInCustomer: CustomerEndpoint['handlers']['getLoggedInCustomer'] =
   async ({ req, config }) => {
     const token: any = req.cookies.get(config.customerCookie)
 
-    console.log('token', token)
-
     if (!token)
       return {
         data: null,
@@ -39,7 +37,6 @@ const getLoggedInCustomer: CustomerEndpoint['handlers']['getLoggedInCustomer'] =
 
     const token_decoded = jwtDecode<any>(<string>token.value, {})
 
-    console.log('token_decoded', token_decoded)
     if (token_decoded.email) {
       return {
         data: {

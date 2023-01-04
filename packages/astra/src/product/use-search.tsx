@@ -24,7 +24,8 @@ export type SearchProductsData = {
 
 export const handler: SWRHook<SearchProductsHook> = {
   fetchOptions: {
-    query: getAllProductsQuery,
+    url: '/api/commerce/catalog/products',
+    method: 'GET',
   },
   async fetcher({ input, options, fetch }) {
     /**
@@ -32,27 +33,25 @@ export const handler: SWRHook<SearchProductsHook> = {
      * - Implement search by feature
      */
 
-    const variables = {
-      ...(input.categoryId && { category: input.categoryId }),
-      ...(input.brandId && { brand: input.brandId }),
-    }
+    console.log('Search', input)
+    console.log(input)
 
     const data = await fetch<any>({
-      query: getAllProductsQuery,
-      variables,
+      ...options,
+      params: input,
     })
 
     if (!data)
       return {
         data: {
           found: false,
-          products: [],
+          products: null,
         },
       }
 
     return {
-      found: data.products.values.length > 0,
-      products: normalizeSearchResult(data.products.values),
+      found: false,
+      products: [],
     }
   },
   useHook:
