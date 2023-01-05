@@ -13,7 +13,6 @@ const productsEndpoint: GetAPISchema<
   ProductsSchema
 >['endpoint']['handler'] = async (ctx) => {
   const { req, handlers } = ctx
-  console.log('req', req)
 
   validateHandlers(req, { GET: handlers['getProducts'] })
   const { searchParams } = new URL(req.url)

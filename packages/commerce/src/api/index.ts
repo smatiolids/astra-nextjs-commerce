@@ -132,7 +132,6 @@ export function getEndpoint<
 ): EndpointHandler {
   const cfg = commerce.getConfig(context.config)
   return function apiHandler(req) {
-    console.log('apiHandler', req)
     return context.handler({
       req,
       commerce,

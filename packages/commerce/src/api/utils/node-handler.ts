@@ -27,7 +27,6 @@ export default function nodeHandler<P extends APIProvider>(
           'Invalid configuration. Please make sure that the /pages/api/commerce/[[...commerce]].ts route is configured correctly, and it passes the commerce instance.'
         )
       }
-      console.log('req.query', req.query)
 
       /**
        * Get the url path
@@ -47,7 +46,6 @@ export default function nodeHandler<P extends APIProvider>(
 
       const output = await handlers[path](transformRequest(req, path))
 
-      console.log('post tranform', output)
       const { status, errors, data, redirectTo, headers } = output
 
       setHeaders(res, headers)

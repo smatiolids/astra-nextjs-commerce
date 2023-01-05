@@ -55,8 +55,6 @@ export const transformRequest = (req: NextApiRequest, path: string) => {
         .join('&')
   }
 
-  console.log(' before transform req.query', query)
-
   return new NextRequest(
     `https://${req.headers.host}/api/commerce/${path}${query}`,
     {

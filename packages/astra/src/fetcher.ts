@@ -48,7 +48,6 @@ export const fetcher: Fetcher = async ({
   if (!url)
     headers.append('x-cassandra-token', process.env.NEXT_PUBLIC_ASTRA_DB_TOKEN)
 
-  console.log('fetch', astraApiUrl)
   const res = await fetch(`${astraApiUrl}`, {
     method,
     body,
